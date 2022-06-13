@@ -58,11 +58,19 @@ public class ProductController {
         return new ResponseEntity<>(customerOptional.get(), HttpStatus.NO_CONTENT);
     }
     @GetMapping("/{name}")
-    public ResponseEntity<Product> findCustomerById(@PathVariable String name) {
-        Optional<Product> customerOptional = productService.findByName(name);
-        if (!customerOptional.isPresent()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(customerOptional.get(), HttpStatus.OK);
+    public ResponseEntity<Iterable<Product>> findAllByNameContainingProduct(@PathVariable String name) {
+        Iterable<Product> products = productService.findByName(name);
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+
+    @GetMapping("/sortByPrice")
+    public ResponseEntity<Iterable<Product>> findAllByOrderByPrice() {
+        Iterable<Product> products = productService.sortByPrice();
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+    @GetMapping("/getTop4")
+    public ResponseEntity<Iterable<Product>> getTop4() {
+        Iterable<Product> products = productService.getTop4();
+        return new ResponseEntity<>(products, HttpStatus.OK);
     }
 }

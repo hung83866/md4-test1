@@ -1,5 +1,7 @@
 package com.codegym.testproduct.service;
 
+import com.codegym.testproduct.model.Product;
+
 import java.util.Optional;
 
 public interface IGeneralService<T> {
@@ -11,5 +13,9 @@ public interface IGeneralService<T> {
 
     void remove(Long id);
 
-    Optional<T> findByName(String name);
+    Iterable<T> findByName(String name);
+
+    Iterable<T> sortByPrice();
+
+    Iterable<Product> getTop4();
 }

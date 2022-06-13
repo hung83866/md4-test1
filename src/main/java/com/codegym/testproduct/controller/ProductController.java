@@ -17,20 +17,20 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<Iterable<Product>> findAllCustomer() {
-        List<Product> customers = (List<Product>) productService.findAll();
-        if (customers.isEmpty()) {
+        List<Product> products = (List<Product>) productService.findAll();
+        if (products.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(customers, HttpStatus.OK);
+        return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product> findCustomerById(@PathVariable Long id) {
-        Optional<Product> customerOptional = productService.findById(id);
-        if (!customerOptional.isPresent()) {
+    public ResponseEntity<Product> findProductById(@PathVariable Long id) {
+        Optional<Product> productOptional = productService.findById(id);
+        if (!productOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(customerOptional.get(), HttpStatus.OK);
+        return new ResponseEntity<>(productOptional.get(), HttpStatus.OK);
     }
 
     @PostMapping
@@ -40,22 +40,22 @@ public class ProductController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Product> updateCustomer(@PathVariable Long id, @RequestBody Product product) {
-        Optional<Product> customerOptional = productService.findById(id);
-        if (!customerOptional.isPresent()) {
+        Optional<Product> productOptional = productService.findById(id);
+        if (!productOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        product.setId(customerOptional.get().getId());
+        product.setId(productOptional.get().getId());
         return new ResponseEntity<>(productService.save(product), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Product> deleteCustomer(@PathVariable Long id) {
-        Optional<Product> customerOptional = productService.findById(id);
-        if (!customerOptional.isPresent()) {
+        Optional<Product> productOptional = productService.findById(id);
+        if (!productOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         productService.remove(id);
-        return new ResponseEntity<>(customerOptional.get(), HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(productOptional.get(), HttpStatus.NO_CONTENT);
     }
     @GetMapping("/{name}")
     public ResponseEntity<Iterable<Product>> findAllByNameContainingProduct(@PathVariable String name) {

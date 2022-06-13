@@ -6,6 +6,4 @@ import com.codegym.testproduct.service.IGeneralService;
 import java.util.List;
 
 public interface IProductService extends IGeneralService<Product> {
-
-
 }

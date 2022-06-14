@@ -11,6 +11,11 @@ public interface IProductRepository extends PagingAndSortingRepository<Product, 
 
     Iterable<Product> findAllByOrderByPrice();
 
-    @Query(value = "select * from products order by id desc LIMIT 4", nativeQuery = true)
+    @Query(value = "select * from product order by id desc LIMIT 4", nativeQuery = true)
     Iterable<Product> getTop4();
+
+    Iterable<Product> findByCategory_Name(String name);
+
+    Iterable<Product> findByPriceBetween(double from,double to);
+
 }

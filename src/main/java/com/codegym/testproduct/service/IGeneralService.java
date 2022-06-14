@@ -18,4 +18,8 @@ public interface IGeneralService<T> {
     Iterable<T> sortByPrice();
 
     Iterable<Product> getTop4();
+
+    Iterable<Product> findByCategory_name(String name);
+
+    Iterable<Product> findByPriceBetween(double from,double to);
 }
